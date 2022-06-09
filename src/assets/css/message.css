@@ -1,0 +1,28 @@
+.message {
+    display: flex;
+    flex-direction: column;
+}
+
+.message .bubble-container {
+    font-size: .9375rem;
+    display: flex;
+    line-height: 20px;
+}
+
+.message.outgoing .bubble-container {
+    justify-content: flex-end;
+}
+
+.message .bubble-container .bubble {
+    margin: 1px 0;
+    background: #e4e6eb;
+    padding: 8px 12px;
+    max-width: 75%;
+    border-radius: 20px;
+}
+
+.message.outgoing .bubble-container .bubble {
+    background: #0099ff;
+    color: white;
+    border-radius: 20px;
+}

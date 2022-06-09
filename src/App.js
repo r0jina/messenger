@@ -1,24 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Layout } from "antd";
+import { useState } from "react";
+import LeftSidebar from "./components/Sidebar/LeftSidebar";
+import TopLayout from "./components/TopLayout/TopLayout";
+import Messenger from "./components/Messenger/Messenger";
+import RightSidebar from "./components/Sidebar/RightSidebar";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+
+const { Content } = Layout;
 
 function App() {
+  const [rightSidebarState, setRightSidebarState] = useState(true);
+
+  const handleInformationButtonClick = () => {
+    setRightSidebarState(!rightSidebarState);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Layout style={{ minHeight: "100vh" }}>
+        <TopLayout />
+
+        <Layout>
+          <LeftSidebar />
+
+          <Layout style={{ padding: 0 }}>
+            <Content style={{ margin: 0 }}>
+              <Messenger
+                onInformationButtonClick={handleInformationButtonClick}
+                rightSidebarState={rightSidebarState}
+              />
+            </Content>
+          </Layout>
+
+          {rightSidebarState ? <RightSidebar /> : ""}
+        </Layout>
+      </Layout>
+    </Provider>
   );
 }
 
