@@ -82,7 +82,7 @@ const MessageList = ({ userData, fetchUsers }) => {
         <Avatar size={65} icon={<UserOutlined />} />
 
         <Title level={5} style={{ marginTop: 4 }}>
-          Jane Doe
+          Fr Rati Kaur
         </Title>
 
         <Divider />
