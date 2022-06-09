@@ -2,7 +2,6 @@ import "../../assets/css/message.css";
 
 const Message = ({ message, lastMessageRef, firstMessageRef }) => {
   const incomingOutgoingCheck = (value) => {
-    // setting the messages as incoming or outgoing
     if (value % 2 === 0) {
       return "message incoming";
     } else {

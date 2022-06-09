@@ -3,7 +3,7 @@ import { Layout } from "antd";
 import { useState } from "react";
 import LeftSidebar from "./components/Sidebar/LeftSidebar";
 import TopLayout from "./components/TopLayout/TopLayout";
-import Messenger from "./components/Messenger/Messenger";
+import Messenger from "./components/Message/Messenger";
 import RightSidebar from "./components/Sidebar/RightSidebar";
 import { Provider } from "react-redux";
 import store from "./redux/store";

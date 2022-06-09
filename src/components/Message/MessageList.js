@@ -1,7 +1,7 @@
 import { createRef, useCallback, useEffect, useRef, useState } from "react";
 import { Avatar, Divider, Spin, Typography } from "antd";
 import "../../assets/css/message.css";
-import Message from "../Message/Message";
+import Message from "./Message";
 import { UserOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
 import { fetchUsers } from "../../redux";
@@ -9,17 +9,17 @@ import { fetchUsers } from "../../redux";
 const { Title } = Typography;
 
 const MessageList = ({ userData, fetchUsers }) => {
-  const [pageNumber, setPageNumber] = useState(100); //starting page for the api
+  const [pageNumber, setPageNumber] = useState(100);
 
-  const [messages, setMessages] = useState([]); // actual data displayed
+  const [messages, setMessages] = useState([]);
 
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    fetchUsers(pageNumber); // get users data according to the page number
-  }, [pageNumber]); //triggers everytime pageNumber changes
+    fetchUsers(pageNumber);
+  }, [pageNumber]);
 
-  const { users, loading, error, max } = userData; // destructuring the fetched data
+  const { users, loading, error, max } = userData;
 
   useEffect(() => {
     const sortList = (list) => {
@@ -29,8 +29,8 @@ const MessageList = ({ userData, fetchUsers }) => {
     };
 
     if (users.length !== 0) {
-      let newList = [...messages, ...new Set(sortList(users))]; // sorting and making the fetched data unique, appending the data to the list to be displayed
-      setMessages([...new Set(newList)]); // making the list to be displayed unique
+      let newList = [...messages, ...new Set(sortList(users))];
+      setMessages([...new Set(newList)]);
     }
   }, [users]);
 
@@ -41,20 +41,19 @@ const MessageList = ({ userData, fetchUsers }) => {
   const lastMessageRef = useCallback(
     (node) => {
       if (loading) {
-        return; // if loading return
+        return;
       }
 
       if (observer.current) {
-        observer.current.disconnect(); // remove the previous ref
+        observer.current.disconnect();
       }
 
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && max === false) {
-          // get the last message element
           console.log("Last Element Visible");
-          setPageNumber((pageNumber) => pageNumber - 1); // goto next page i.e. change pageNumber
+          setPageNumber((pageNumber) => pageNumber - 1);
           if (count === 2) {
-            node.scrollIntoView({ behavior: "auto" }); // stick the scroll to the last element so that it does not scroll up and fetch data continuously
+            node.scrollIntoView({ behavior: "auto" });
           }
         }
       });

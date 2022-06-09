@@ -20,7 +20,7 @@ import {
   UserOutlined,
   VideoCameraTwoTone,
 } from "@ant-design/icons";
-import MessageList from "../MessageList/MessageList";
+import MessageList from "./MessageList";
 
 const { Title } = Typography;
 
