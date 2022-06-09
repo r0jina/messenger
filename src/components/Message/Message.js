@@ -1,7 +1,7 @@
 import "../../assets/css/message.css";
 
-const Message = ({ message, lastMessageRef, firstMessageRef }) => {
-  const incomingOutgoingCheck = (value) => {
+const Message = ({ message, firstMessageRef, lastMessageRef }) => {
+  const inOutMessageCheck = (value) => {
     if (value % 2 === 0) {
       return "message incoming";
     } else {
@@ -10,7 +10,7 @@ const Message = ({ message, lastMessageRef, firstMessageRef }) => {
   };
 
   return (
-    <div className={incomingOutgoingCheck(message.id)} key={message.id}>
+    <div className={inOutMessageCheck(message.id)} key={message.id}>
       <div className="bubble-container">
         {lastMessageRef ? (
           <div className="bubble" ref={lastMessageRef}>

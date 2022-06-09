@@ -1,6 +1,6 @@
-import { createRef, useCallback, useEffect, useRef, useState } from "react";
 import { Avatar, Divider, Spin, Typography } from "antd";
 import "../../assets/css/message.css";
+import { createRef, useCallback, useEffect, useRef, useState } from "react";
 import Message from "./Message";
 import { UserOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
@@ -15,11 +15,11 @@ const MessageList = ({ userData, fetchUsers }) => {
 
   const [count, setCount] = useState(0);
 
+  const { users, loading, error, max } = userData;
+
   useEffect(() => {
     fetchUsers(pageNumber);
   }, [pageNumber]);
-
-  const { users, loading, error, max } = userData;
 
   useEffect(() => {
     const sortList = (list) => {
@@ -59,7 +59,7 @@ const MessageList = ({ userData, fetchUsers }) => {
       });
 
       if (node) {
-        observer.current.observe(node); // set new message element to ref
+        observer.current.observe(node);
       }
     },
     [loading, max]
@@ -71,7 +71,7 @@ const MessageList = ({ userData, fetchUsers }) => {
     };
 
     if (messages.length > 0 && loading === false && count === 0) {
-      scrollToBottom(); // scroll to the first message after the data has been loaded but only once
+      scrollToBottom();
       setCount(2);
     }
   }, [loading, messages, count, firstMessageRef]);
@@ -110,7 +110,6 @@ const MessageList = ({ userData, fetchUsers }) => {
     <div style={message_list_container}>
       {messages.map((message, index) => {
         if (messages.length === index + 1) {
-          // check if last element to set ref to last message
           return (
             <Message
               message={message}
@@ -120,7 +119,6 @@ const MessageList = ({ userData, fetchUsers }) => {
           );
         } else {
           if (index === 0) {
-            // check if first element to set ref to fist message
             return (
               <Message
                 message={message}
